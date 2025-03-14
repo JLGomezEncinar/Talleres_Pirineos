@@ -7,6 +7,14 @@ public class Cliente {
     private String telefono;
     private String direccion;
 
+    public Cliente(String dni, String nombre, String apellidos, String telefono, String direccion) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
+
     public String getDni() {
         return dni;
     }
