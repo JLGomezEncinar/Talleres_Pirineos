@@ -1,9 +1,13 @@
 package com.iessanalberto.dam1.tallerespirineos.screens;
 
 import com.iessanalberto.dam1.tallerespirineos.models.Cliente;
+import com.iessanalberto.dam1.tallerespirineos.models.Coche;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -22,6 +26,12 @@ public class ClienteScreen {
     private TextField txtTelefono = new TextField();
     private Label lblDireccion = new Label("Dirección");
     private TextField txtDireccion = new TextField();
+    private TableView<Coche> tblCoches = new TableView();
+    // Columnas de la tabla
+    private TableColumn<Coche,String> colMatricula = new TableColumn<>("Matrícula");
+    private TableColumn<Coche,String> colMarca = new TableColumn<>("Marca");
+    private TableColumn<Coche,String> colModelo = new TableColumn<>("Modelo");
+    private TableColumn<Coche,Integer> colKm = new TableColumn<>("Kilometros");
 
     public ClienteScreen(Cliente cliente) {
         // Definimos los parámetros del layout
@@ -46,6 +56,15 @@ public class ClienteScreen {
         gridPane.add(txtTelefono,3,2);
         gridPane.add(lblDireccion,0,3);
         gridPane.add(txtDireccion,1,3);
+        //Añadimos la tabla
+        gridPane.add(tblCoches,0,4,3,1);
+        tblCoches.getItems().addAll(new Coche("a","a","a",1));
+        // Asignamos las columnas a la tabla
+        tblCoches.getColumns().addAll(colMatricula,colMarca,colModelo,colKm);
+        colMatricula.setCellValueFactory(new PropertyValueFactory<Coche,String>("matricula"));
+        colMarca.setCellValueFactory(new PropertyValueFactory<Coche,String>("marca"));
+        colModelo.setCellValueFactory(new PropertyValueFactory<Coche,String>("modelo"));
+        colKm.setCellValueFactory(new PropertyValueFactory<Coche,Integer>("kilometros"));
         root.getChildren().addAll(gridPane);
         // Añadimos los datos del cliente al cliente correspondientes
         txtNombre.setText(cliente.getNombre());
@@ -53,6 +72,8 @@ public class ClienteScreen {
         txtDni.setText(cliente.getDni());
         txtTelefono.setText(cliente.getTelefono());
         txtDireccion.setText(cliente.getDireccion());
+        //Definimos los componentes de la tabla de Coches
+
     }
 
     public VBox getRoot() {

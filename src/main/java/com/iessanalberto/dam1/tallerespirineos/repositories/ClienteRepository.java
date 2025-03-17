@@ -25,7 +25,8 @@ public class ClienteRepository {
         return clienteRepository;
     }
     private void cargarMapa() {
-        mapaClientes.put("12345678A", new Cliente("12345678A", "Juan", "Pérez", "600123456", "Calle Falsa 123"));
+        mapaClientes.put("72051564Q", new Cliente ("72051564Q","José Luis","Gómez", "600000000","Casa"));
+        mapaClientes.put("12345678Z", new Cliente("12345678Z", "Juan", "Pérez", "600123456", "Calle Falsa 123"));
         mapaClientes.put("87654321B", new Cliente("87654321B", "Ana", "López", "611987654", "Avenida Siempre Viva 742"));
         mapaClientes.put("11223344C", new Cliente("11223344C", "Carlos", "Gómez", "622345678", "Plaza Mayor 5"));
         mapaClientes.put("22334455D", new Cliente("22334455D", "María", "Fernández", "633456789", "Calle Sol 10"));
