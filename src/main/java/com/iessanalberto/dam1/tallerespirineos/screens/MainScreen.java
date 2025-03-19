@@ -1,8 +1,9 @@
 package com.iessanalberto.dam1.tallerespirineos.screens;
 
-import com.iessanalberto.dam1.tallerespirineos.models.Cliente;
+
 import com.iessanalberto.dam1.tallerespirineos.navigation.Navigation;
 import com.iessanalberto.dam1.tallerespirineos.services.ClientService;
+import com.iessanalberto.dam1.tallerespirineos.services.CocheService;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -21,6 +22,7 @@ public class MainScreen {
     Button btnBusqueda = new Button("Buscar");
     //Añadimos los servicios necesarios para la ventana
     private ClientService clientService = new ClientService();
+    private CocheService cocheService = new CocheService();
     public MainScreen() {
         // Configuramos los componentes al layout
         root.setPadding(new Insets(10));
@@ -57,6 +59,21 @@ public class MainScreen {
 
 
                 }
+            } else if (cmbBusqueda.getValue().equals("Matrícula")) {
+                try {
+
+                    Navigation.navigate("CocheScreen", cocheService.buscarCoche(txtBusqueda.getText()));
+                } catch (Exception exception){
+
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Coche no encontrado");
+                    alert.setHeaderText("Error al recuperar el coche");
+                    alert.setContentText(exception.getMessage());
+                    alert.showAndWait();
+
+
+                }
+
             }
         });
     }

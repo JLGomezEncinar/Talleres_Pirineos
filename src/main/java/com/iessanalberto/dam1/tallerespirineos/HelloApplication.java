@@ -2,8 +2,6 @@ package com.iessanalberto.dam1.tallerespirineos;
 
 import com.iessanalberto.dam1.tallerespirineos.navigation.Navigation;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
