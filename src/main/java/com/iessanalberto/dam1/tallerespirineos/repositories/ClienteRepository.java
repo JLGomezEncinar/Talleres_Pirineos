@@ -2,6 +2,9 @@ package com.iessanalberto.dam1.tallerespirineos.repositories;
 
 import com.iessanalberto.dam1.tallerespirineos.models.Cliente;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +14,8 @@ public class ClienteRepository {
     private Map<String, Cliente> mapaClientes = new HashMap<>();
     // Patrón Singleton - Constructor privado, incluye la carga manual del mapa
     private ClienteRepository(){
-        cargarMapa();
+        //cargarMapa();
+        cargarMapaFichero();
 
     }
     // Carga inicial del mapa
@@ -23,6 +27,22 @@ public class ClienteRepository {
                      
         }
         return clienteRepository;
+    }
+    // Carga inicial del mapa con fichero
+    private void cargarMapaFichero() {
+        try{
+            BufferedReader reader =
+                    new BufferedReader(new FileReader("entrada.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                String [] lineaTroceada = line.split(";");
+                mapaClientes.put(lineaTroceada[0],new Cliente(lineaTroceada[0],lineaTroceada[1],lineaTroceada[2],lineaTroceada[3],lineaTroceada[4]));
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     private void cargarMapa() {
         mapaClientes.put("72051564Q", new Cliente ("72051564Q","José Luis","Gómez", "600000000","Casa"));

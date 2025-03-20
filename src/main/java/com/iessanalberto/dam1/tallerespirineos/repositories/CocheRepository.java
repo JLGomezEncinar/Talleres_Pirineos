@@ -1,8 +1,12 @@
 package com.iessanalberto.dam1.tallerespirineos.repositories;
 
+import com.iessanalberto.dam1.tallerespirineos.models.Cliente;
 import com.iessanalberto.dam1.tallerespirineos.models.Coche;
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,9 +16,12 @@ public class CocheRepository {
     private Map<String, Coche> mapaCoches = new HashMap<>();
     // Patrón Singleton - Constructor privado, incluye la carga manual del mapa
     private CocheRepository(){
-        cargarMapa();
+       // cargarMapa();
+        cargarMapaFichero();
 
     }
+
+
     // Carga inicial del mapa
 
 
@@ -24,6 +31,21 @@ public class CocheRepository {
                      
         }
         return cocheRepository;
+    }
+    private void cargarMapaFichero() {
+        try{
+            BufferedReader reader =
+                    new BufferedReader(new FileReader("entrada2.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                String [] lineaTroceada = line.split(";");
+                mapaCoches.put(lineaTroceada[0],new Coche(lineaTroceada[0],lineaTroceada[1],lineaTroceada[2],Integer.parseInt(lineaTroceada[3])));
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     private void cargarMapa() {
         // Cargamos 30 coches manualmente

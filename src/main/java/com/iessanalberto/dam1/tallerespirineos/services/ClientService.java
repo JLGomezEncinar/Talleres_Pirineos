@@ -15,25 +15,21 @@ public class ClientService {
 
     private void validar(String dni) throws Exception{
         String letrasDni = "TRWAGMYFPDXBNJZSQVHLCKE";
-
-        // Transformamos los dni extranjeros
+        // Transformamos los DNIs extranjeros
         if (dni.charAt(0) == 'X') {
-            dni = "0" +dni.substring(1);
+            dni = "0" + dni.substring(1);
         } else if (dni.charAt(0) == 'Y') {
-            dni = "1" +dni.substring(1);
+            dni = "1" + dni.substring(1);
         } else if (dni.charAt(0) == 'Z') {
-            dni = "2" +dni.substring(1);
+            dni = "2" + dni.substring(1);
         }
         try {
-            int numeroDni = Integer.parseInt(dni.substring(0, dni.length() - 1));
-            if(dni.charAt(dni.length() -1) != letrasDni.charAt(numeroDni%23)) {
-                throw new NumberFormatException("La letra del dni no es válida");
-
+            int numeroDni = Integer.parseInt(dni.substring(0,dni.length() - 1));
+            if (dni.charAt(dni.length() - 1) != letrasDni.charAt(numeroDni%23)){
+                throw new Exception("La letra del dni no es válida");
             }
-
-        } catch (NumberFormatException exception) {
+        } catch (NumberFormatException exception){
             throw new Exception("El dni introducido no es válido");
-
         }
     }
 }
